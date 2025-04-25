@@ -2,12 +2,17 @@
 `default_nettype none
 
 module tb_alu;
-reg clk;
-reg rst_n;
+logic clk;
+logic [1:0] opcode;
+logic [7:0] a;
+logic [7:0] b;
+logic [7:0] result;
 
 alu  DUT(
-    .rst_n (rst_n),
-    .clk (clk),
+    .opcode(opcode),
+    .a(a),
+    .b(b),
+    .result(result)
 );
 
 localparam CLK_PERIOD = 10;
@@ -19,15 +24,18 @@ initial begin
 end
 
 initial begin
-    #1 rst_n<=1'bx;clk<=1'bx;
-    #(CLK_PERIOD*3) rst_n<=1;
-    #(CLK_PERIOD*3) rst_n<=0;clk<=0;
-    repeat(5) @(posedge clk);
-    rst_n<=1;
+    #1 clk<=1'b0;
+    a = 1;
+    b = 1;
+    opcode = 2'b00;
+    repeat (5)@(posedge clk);
+    assert (result == 2)
+      $info("Assertion passed: result is equal to 2");
+    else
+      $error("Assertion failed: result is not equal to 2");
     @(posedge clk);
     repeat(2) @(posedge clk);
-    $finish(2);
+    $finish;
 end
 
 endmodule
-`default_nettype wire
