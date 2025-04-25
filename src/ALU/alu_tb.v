@@ -30,9 +30,27 @@ initial begin
     opcode = 2'b00;
     repeat (5)@(posedge clk);
     assert (result == 2)
-      $info("Assertion passed: result is equal to 2");
+      $info("ADD Assertion passed: result is equal to 2");
     else
-      $error("Assertion failed: result is not equal to 2");
+      $error("ADD Assertion failed: result is not equal to 2");
+    opcode = 2'b01;
+    repeat (5)@(posedge clk);
+    assert (result == 0)
+      $info("SUB Assertion passed: result is equal to 0");
+    else
+      $error("SUB Assertion failed: result is not equal to 0");
+      opcode = 2'b10;
+      repeat (5)@(posedge clk);
+      assert (result == 1)
+        $info("AND Assertion passed: result is equal to 1");
+      else
+        $error("AND Assertion failed: result is not equal to 1");
+        opcode = 2'b11;
+    repeat (5)@(posedge clk);
+    assert (result == 1)
+      $info("OR Assertion passed: result is equal to 1");
+    else
+      $error("OR Assertion failed: result is not equal to 1");
     @(posedge clk);
     repeat(2) @(posedge clk);
     $finish;
