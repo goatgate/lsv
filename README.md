@@ -57,4 +57,4 @@ This repository contains a collection of SystemVerilog circuits with intentional
 3. Use assertions to catch the bugs
 4. Fix the problems and verify the solutions
 
-Each module contains comments indicating the intended functionality and hints about the bugs present.
+Each module contains comments indicating the intended functionality 
