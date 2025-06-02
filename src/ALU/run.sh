@@ -1,1 +1,0 @@
-iverilog -g2005-sv alu_tb.v
